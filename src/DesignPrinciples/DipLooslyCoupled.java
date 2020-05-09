@@ -25,6 +25,7 @@ class BinarySearch1{
 class BubbleSortAlgorithm1 implements SortAlgorithm{
     @Override
     public int[] sort(int number[]){
+        System.out.println("Bubble Sort Alogorithm");
         //we have some bubble sorting logic here
         int a[] = {0,1,2,3,4,34};
         return a;
@@ -34,6 +35,7 @@ class BubbleSortAlgorithm1 implements SortAlgorithm{
 class QuickSortAlgorithm1 implements SortAlgorithm{
     @Override
     public int[] sort(int number[]){
+        System.out.println("Quick Sort Alogorithm");
         //we have some quick sorting logic here
         int a[] = {0,1,2,3,4,34};
         return a;
