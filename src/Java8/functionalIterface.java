@@ -1074,13 +1074,163 @@ class Test44{
 }
 
 
+class Test45 {
+    public static void main(String[] args) {
+        Supplier<String> callAson = () -> {
+            String[] sons = {"kumar", "Sudha", "Ravi", "Rajesh"};
+            int x = (int) (Math.random() * 4);
+            return sons[x];
+        };
+        System.out.println(callAson.get());
+    }
+}
 
 
+class Test46 {
+    public static void main(String[] args) {
+        Supplier<Date> getTime = () -> new Date();
+        System.out.println(getTime.get());
+        System.out.println(getTime.get());
+        System.out.println(getTime.get());
+    }
+}
 
 
+class Test47 {
+    public static void main(String[] args) {
+        Supplier<String> otps = () -> {
+            String otp = "";
+            for (int i = 1; i <= 6; i++) {
+                otp = otp + (int) (Math.random() * 10);
+            }
+            return otp;
+        };
+        System.out.println(otps.get());
+    }
+}
+
+class Test48 {
+    public static void main(String[] args) {
+        Supplier<String> s = () -> {
+            String symbols = "ABCDEFGHIJKLMNOPQRSTUVWXYZ#$@";
+            Supplier<Integer> d = () -> (int) (Math.random() * 10);
+            Supplier<Character> c = () -> symbols.charAt((int) (Math.random() * 29));
+            String pwd = "";
+            for (int i = 1; i <= 8; i++) {
+                if (i % 2 == 0) {
+                    pwd = pwd + d.get();
+                } else {
+                    pwd = pwd + c.get();
+                }
+            }
+            return pwd;
+        };
+        System.out.println(s.get());
+    }
+}
 
 
+class Test49 {
+    public static void main(String[] args) {
+        BiPredicate<Integer, Integer> isSumEvenNumber = (a, b) -> (a + b) % 2 == 0;
+        System.out.println(isSumEvenNumber.test(10, 20));
+        System.out.println(isSumEvenNumber.test(15, 20));
+    }
+}
 
+class Test50 {
+    public static void main(String[] args) {
+        BiFunction<Integer, Integer, Integer> getMultiplication = (a, b) -> a * b;
+        System.out.println(getMultiplication.apply(10, 20));
+        System.out.println(getMultiplication.apply(100, 200));
+    }
+}
+
+class Student1 {
+    String name;
+    int rollno;
+    Student1(String name, int rollno) {
+        this.name = name;
+        this.rollno = rollno;
+    }
+}
+
+class Test51 {
+    public static void main(String[] args) {
+        ArrayList<Student1> l = new ArrayList<Student1>();
+        BiFunction<String, Integer, Student1> createStudent = Student1::new;
+        l.add(createStudent.apply("Kumar", 100));
+        l.add(createStudent.apply("Ravi", 200));
+        l.add(createStudent.apply("Rajesh", 300));
+        l.add(createStudent.apply("Sudha", 400));
+        for (Student1 s : l) {
+            System.out.println("Student Name:" + s.name);
+            System.out.println("Student Rollno:" + s.rollno);
+            System.out.println();
+        }
+    }
+}
+
+ class Employee1{
+     int eno;
+     String name;
+     double dailyWage;
+
+     Employee1(int eno, String name, double dailyWage) {
+         this.eno = eno;
+         this.name = name;
+         this.dailyWage = dailyWage;
+     }
+ }
+
+class TimeSheet {
+    int eno;
+    int days;
+
+    TimeSheet(int eno, int days) {
+        this.eno = eno;
+        this.days = days;
+    }
+}
+
+class Test52 {
+    public static void main(String[] args) {
+        BiFunction<Employee1, TimeSheet, Double> getMontylyWages = (e, t) -> e.dailyWage * t.days;
+        Employee1 e = new Employee1(101, "kiyan", 150);
+        TimeSheet t = new TimeSheet(101, 25);
+        System.out.println("Employee Monthly Salary:" + getMontylyWages.apply(e, t));
+    }
+}
+
+class Test53 {
+    public static void main(String[] args) {
+        BiConsumer<String, String> getCompleteName = (s1, s2) -> System.out.println(s1 + s2);
+        getCompleteName.accept("kiyandoor", " Kumar");
+    }
+}
+
+class Test54 {
+    public static void main(String[] args) {
+        ArrayList<Employe> l = new ArrayList<Employe>();
+        populate(l);
+        BiConsumer<Employe, Integer> increment = (e, d) -> e.salary = e.salary + d;
+        for (Employe e : l) {
+            increment.accept(e, 5);
+        }
+        for (Employe e : l) {
+            System.out.println("Employee Name:" + e.name);
+            System.out.println("Employee Salary:" + e.salary);
+            System.out.println();
+        }
+    }
+
+    public static void populate(ArrayList<Employe> list) {
+        list.add(new Employe("kiyan", "SE", 10, "HYD"));
+        list.add(new Employe("Bala", "MGR", 20, "BLR"));
+        list.add(new Employe("Naveen", "SSE", 15, "BLR"));
+        list.add(new Employe("Sai", "MGR", 25, "BLR"));
+    }
+}
 
 class Test60{
     public static void main(String[] args) {
