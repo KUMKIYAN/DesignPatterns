@@ -1,6 +1,4 @@
-package DesignPrinciples;
-
-import javax.print.Doc;
+package designprinciples;
 
 public class ISP {
 }

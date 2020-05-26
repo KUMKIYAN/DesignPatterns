@@ -1,6 +1,4 @@
-package DesignPrinciples;
-
-import com.sun.org.apache.xml.internal.serialize.LineSeparator;
+package designprinciples;
 
 import java.util.ArrayList;
 import java.util.List;

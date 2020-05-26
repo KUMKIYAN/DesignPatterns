@@ -1,6 +1,4 @@
-package DesignPrinciples;
-
-import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
+package designprinciples;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package DesignPrinciples;
+package designprinciples;
 
 class LiskovSubstition {
 

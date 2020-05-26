@@ -1,4 +1,4 @@
-package DesignPrinciples;
+package designprinciples;
 
 import java.util.ArrayList;
 import java.util.Collections;

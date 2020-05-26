@@ -1,4 +1,4 @@
-package DesignPrinciples;
+package designprinciples;
 
 import java.util.*;
 import java.util.function.Consumer;

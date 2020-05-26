@@ -1,6 +1,4 @@
-package Java8;
-
-import com.sun.org.apache.bcel.internal.generic.ARETURN;
+package java8;
 
 import java.util.*;
 import java.util.function.*;
