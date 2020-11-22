@@ -1,5 +1,8 @@
 package java8;
 
+import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
+
+import java.time.*;
 import java.util.*;
 import java.util.function.*;
 import java.util.stream.Collectors;
@@ -1358,8 +1361,19 @@ interface interf9{
     Sample get(int i);
 }
 
+interface interf10{
+    Sample get(int i, int j);
+}
+
+interface Interf11{
+    Integer sum(int i, int j, int k, int l);
+}
+
+
+
 class Sample{
     int k;
+    int j;
     Sample(){
         System.out.println("no arg constructor");
     }
@@ -1368,13 +1382,224 @@ class Sample{
         System.out.println("1 - arg constructor");
         this.k = k;
     }
+
+    Sample(int k, int j){
+        System.out.println("j - arg constructor");
+        this.k = k;
+        this.j = j;
+    }
+
+    static int sum(int a, int b){
+        return a+b ;
+    }
+
+    static int sum(int a, int b, int c, int d){
+        return a+b+c+d ;
+    }
 }
 
+
+
 class Test65{
+
+
+    static BiFunction<Integer, Integer, Sample>  jj = Sample::new;
+
+
+    static BiFunction<Integer, Integer, Integer>  ff = Sample::sum;
+
+    static Interf11 bb = Sample::sum;
+
+
     public static void main(String[] args) {
         interf8 i = Sample::new;
         i.get();
+
         interf9 i2 = Sample::new;
-        i2.get(6);
+        Sample k = i2.get(6);
+
+        interf10 i3 = Sample::new;
+        i3.get(2, 7);
+
+        Sample kf = jj.apply(20,30);
+        System.out.println(kf.k);
+        System.out.println(kf.j);
+
+
+
+        int kg = ff.apply(7,8);
+        System.out.println(kg);
+
+        kg = ff.apply(21,9);
+        System.out.println(kg);
+
+        kg = bb.sum(4,5,6,7);
+        System.out.println(kg);
+
+    }
+}
+
+
+
+
+
+class MethodReferenceExamples{
+    Predicate<Integer> isEven = i -> i%2 == 0;
+
+    public static void main(String[] args) {
+        ArrayList<Integer> arrayList = new ArrayList<Integer>();
+        arrayList.add(10);
+        arrayList.add(20);
+        arrayList.add(5);
+        arrayList.add(1);
+        arrayList.add(68);
+
+
+
+
+        arrayList.stream().filter(a -> a/2 == 0).forEach(a -> System.out.println(a));
+        arrayList.stream().filter(MethodReferenceExamples::isEven).forEach(a -> System.out.print(a));
+        arrayList.stream().filter(MethodReferenceExamples::isEven).forEach(System.out::println);
+        arrayList.stream().filter(MethodReferenceExamples::isEven).forEach(MethodReferenceExamples::Myprint);
+
+        Predicate<Integer> isOdd = MethodReferenceExamples::isEven;
+        Predicate<Integer> odd = i -> i%2 !=0;
+
+        Predicate<Integer> name = MethodReferenceExamples::isEven;
+
+        System.out.println(isOdd.test(30));
+        System.out.println(isOdd.test(51));
+
+        WelcomMessage welcome = MethodReferenceExamples::helloStatic;
+        System.out.println(welcome.WelcomeMessage("Girish"));
+        WelcomMessage welcome1 = new MethodReferenceExamples()::helloInstance;
+        System.out.println(welcome1.WelcomeMessage("Kiyan"));
+    }
+
+
+
+    static boolean isEven(int a){
+        return a%2 == 0;
+    }
+
+
+
+
+    static void Myprint(int a){
+        System.out.println(a);
+    }
+
+
+    static String helloStatic(String name){
+        return "Welcome To Bank Mr. " + name;
+    }
+    String helloInstance(String name){
+        return "Welcome To Office Mr. " + name;
+    }
+
+
+
+    static boolean isOdd(int a){
+        return a%2 != 0;
+    }
+}
+
+interface WelcomMessage{
+    String WelcomeMessage(String name);
+}
+
+
+class DateAndTime{
+
+    public static void main(String[] args) {
+
+        //LocalDate date = LocalDate.of(yyyy,dd,mm)
+        LocalDate date = LocalDate.now();
+        System.out.println(date.getDayOfMonth());
+        System.out.println(date.getMonthValue());
+        System.out.println(date.getDayOfYear());
+
+        LocalTime time = LocalTime.now();
+        System.out.println(time.getHour());
+        System.out.println(time.getMinute());
+        System.out.println(time.getSecond());
+        System.out.println(time.getNano());
+
+        LocalDateTime dt = LocalDateTime.of(1987,07,01,12,45,30);
+        System.out.println(dt.plusMonths(2));
+        System.out.println(dt.minusMonths(2));
+        System.out.println(dt.minusWeeks(4));
+
+        Period p = Period.between(LocalDate.now(), LocalDate.now().minusMonths(6));
+        System.out.println(p.getYears());
+        System.out.println(p.getMonths());
+        System.out.println(p.getDays());
+
+        ZoneId zone = ZoneId.systemDefault();
+        System.out.println(zone);
+        ZoneId zone1 = ZoneId.of("Asia/Kolkata");
+        ZonedDateTime zt = ZonedDateTime.now(zone1);
+        System.out.println(zt);
+
+
+    }
+
+
+}
+
+
+
+class FreshEmployee{
+    String name;
+    int id;
+    String designation;
+
+    public FreshEmployee(String name, int id, String designation) {
+        this.name = name;
+        this.id = id;
+        this.designation = designation;
+    }
+}
+
+
+class Test66 {
+    public static void main(String[] args) {
+        ArrayList<FreshEmployee> employees = new ArrayList<>();
+        employees.add(new FreshEmployee("kiyan1", 1001, "SE"));
+        employees.add(new FreshEmployee("kiyan2", 1002, "Associate"));
+        employees.add(new FreshEmployee("kiyan3", 1003, "SE"));
+        employees.add(new FreshEmployee(null, 1003, "SE"));
+        Function<Integer, Integer> myFunction = (i) -> i * i;
+    }
+
+    static boolean getSEEmployees(FreshEmployee employee) {
+        return employee.designation.equalsIgnoreCase("SE");
+    }
+
+    static String getHii(FreshEmployee employee) {
+        return "hi " + employee.name;
+    }
+
+}
+    interface Interf12{
+        default int sum(int a, int b){
+            return a + b;
+        }
+
+        default int sum1(int a, int b){
+            return a + b;
+        }
+    }
+
+    interface Interf13{
+        default int sum(int a, int b){
+            return a + b;
+        }
+    }
+
+class ABC implements Interf12, Interf13{
+    @Override
+    public int sum(int a, int b) {
+        return 0;
     }
 }
