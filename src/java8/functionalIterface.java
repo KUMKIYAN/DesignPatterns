@@ -286,7 +286,7 @@ class Test13{
 }
 
 // anonymous inner class before lambda expression
-class ThreadDemo{
+class ThreadDemo {
     public static void main(String[] args) {
         Runnable r = new Runnable() {
             @Override
@@ -347,7 +347,7 @@ class ThreadDemo2{
 }
 
 
-// Anonymous inner class extends concrete class.
+// Anonymous inner class extends concrete class -1.
 // Where as lambda expression can't do this implementation
 class Test14{
     void m1(){
@@ -371,12 +371,32 @@ class Test14{
     }
 }
 
-// anonymous inner class extends abstract class
+// Anonymous inner class extends concrete class - 2.
+// Where as lambda expression can't do this implementation
+class Test67{
+    void m1(){
+        System.out.println("i am m1 method - hi");
+    }
+
+    class Test68 extends Test67{
+            void m2() {
+                System.out.println("I am m2 method - hi");
+            }
+        };
+
+    public static void main(String[] args) {
+        Test68 t = new Test67().new Test68();
+        t.m1();
+        t.m2();
+    }
+}
+
+// anonymous inner class extends abstract class - 1
 // Where as lambda expression can't do this implementation
 abstract class Test15 {
     abstract void m1();
-
 }
+
 class Test21 {
     void m2() {
         Test15 t = new Test15() {
